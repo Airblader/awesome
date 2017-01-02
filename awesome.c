@@ -576,6 +576,10 @@ main(int argc, char **argv)
     sigaction(SIGILL, &sa, 0);
     sigaction(SIGSEGV, &sa, 0);
 
+    struct sigaction sa2 = { .sa_handler = SIG_IGN };
+    sigemptyset(&sa2.sa_mask);
+    sigaction(SIGPIPE, &sa2, 0);
+
     /* We have no clue where the input focus is right now */
     globalconf.focus.need_update = true;
 
